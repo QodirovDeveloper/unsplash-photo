@@ -150,7 +150,7 @@ export default function AddImage()
           Image Upload + Comment CRUD + User
         </h1>
         {/* Add / Update image */}
-        <div className="mb-4">
+        <div className="mb-4 space-x-2">
           <input
             type="text"
             placeholder="Image URL (optional)"
