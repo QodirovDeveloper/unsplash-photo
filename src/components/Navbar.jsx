@@ -9,6 +9,9 @@ import { MdGroups, MdOutlineHomeWork, MdTranslate } from "react-icons/md";
 import { LuTabletSmartphone } from "react-icons/lu";
 import { SiUnsplash } from "react-icons/si";
 
+import { useSelector } from 'react-redux';
+import { useLogout } from "../hooks/useLogout";
+
 function Navbar({ onSearch })
 {
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +20,11 @@ function Navbar({ onSearch })
     setSearchValue(query);
     onSearch(query);
   };
+
+  const { isPending, logout } = useLogout();
+  const { user } = useSelector((state) => state.user);
+  const navLinkStyle = ({ isActive }) =>
+    `text-sm ${isActive ? "btn btn-outline border-neutral-500" : "btn btn-outline border-base-100"}`
 
   return (
     <div className="fixed top-0 min-[973px]:left-[62px]  z-99999 left-0 right-0 backdrop-blur">
@@ -38,11 +46,11 @@ function Navbar({ onSearch })
               tabIndex={0}
               className="dropdown-content menu bg-base-100 shadow-2xl border border-black/30 rounded-box z-1 w-52 p-2"
             >
+              <NavLink to="/" className={navLinkStyle}>
+                Photos
+              </NavLink>
               <li>
-                <a>Photos</a>
-              </li>
-              <li>
-                <a>Illustrations</a>
+                <NavLink to="/illustrations" className={navLinkStyle}>Illustrations</NavLink>
               </li>
             </ul>
           </div>
@@ -74,7 +82,7 @@ function Navbar({ onSearch })
             </ul>
           </div>
 
-          <div className="dropdown dropdown-end pb-1">
+          {/* <div className="dropdown dropdown-end pb-1">
             <div tabIndex={0} role="button">
               <div
                 className="tooltip tooltip-bottom hover:tooltip-open"
@@ -106,9 +114,62 @@ function Navbar({ onSearch })
                 <button className="btn btn-ghost">Logout @hasanboydevvv</button>
               </li>
             </ul>
+          </div> */}
+
+
+          <div className="dropdown dropdown-end  dropdown-bottom mb-1 cursor-pointer">
+            <div tabIndex={0} role="button">
+              <div
+                className="tooltip tooltip-right hover:tooltip-open"
+                data-tip="Profile"
+              >
+                <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
+
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 h-[340px]  shadow-2xl border border-black/30"
+            >
+              <li>
+                <div className="card-body items-center  border-b text-center">
+                  <p className="text-2xl">
+                    <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
+                  </p>
+                  <h1>
+                    {user.displayName}
+                  </h1>
+                  <p>View profile</p>
+                </div>
+                <a>Stats</a>
+                <a>Download history</a>
+                <a>Account settings</a>
+
+              </li>
+              <li>
+                <NavLink to="/addImage" className={navLinkStyle}>Submit an image</NavLink>
+                <div className="btn btn-ghost">
+                  {!isPending && (
+                    <button onClick={logout} className="btn btn-ghost">
+                      Logout {" "}
+                      {user?.displayName}
+                    </button>
+                  )}
+                  {isPending && (
+                    <button className="btn btn-ghost disabled" disabled>
+                      Logout {" "}
+                      {user?.displayName}
+
+                    </button>
+                  )}
+
+                </div>
+              </li>
+            </ul>
           </div>
 
-          <div className="dropdown dropdown-end pb-1">
+
+          <div className="dropdown dropdown-end pb-1 cursor-pointer">
             <div tabIndex={0} role="button">
               <div
                 className="tooltip tooltip-bottom hover:tooltip-open"
@@ -146,10 +207,19 @@ function Navbar({ onSearch })
                   <MdTranslate /> English
                 </a>
               </li>
+              <li>
+                <ThemeMode />
+              </li>
+              <li>
+                <NavLink
+                  to="/addImage"
+                  className={navLinkStyle}>
+                  Submit an image
+                </NavLink>
+              </li>
             </ul>
           </div>
 
-          <ThemeMode />
         </div>
       </div>
 
