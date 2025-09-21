@@ -8,15 +8,13 @@ import { SlMenu } from "react-icons/sl";
 import { MdGroups, MdOutlineHomeWork, MdTranslate } from "react-icons/md";
 import { LuTabletSmartphone } from "react-icons/lu";
 import { SiUnsplash } from "react-icons/si";
-
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { useLogout } from "../hooks/useLogout";
+import { motion } from "framer-motion";
 
-function Navbar({ onSearch })
-{
+function Navbar({ onSearch }) {
   const [searchValue, setSearchValue] = useState("");
-  const handleSearch = (query) =>
-  {
+  const handleSearch = (query) => {
     setSearchValue(query);
     onSearch(query);
   };
@@ -24,10 +22,19 @@ function Navbar({ onSearch })
   const { isPending, logout } = useLogout();
   const { user } = useSelector((state) => state.user);
   const navLinkStyle = ({ isActive }) =>
-    `text-sm ${isActive ? "btn btn-outline border-neutral-500" : "btn btn-outline border-base-100"}`
+    `text-sm ${
+      isActive
+        ? "btn btn-outline border-neutral-500"
+        : "btn btn-outline border-base-100"
+    }`;
 
   return (
-    <div className="fixed top-0 min-[973px]:left-[62px]  z-999 left-0 right-0 backdrop-blur">
+    <motion.div
+      className="fixed top-0 min-[973px]:left-[62px]  z-999 left-0 right-0 backdrop-blur"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }} 
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="min-[973px]:hidden pt-4 px-7 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <span className="text-2xl">
@@ -50,7 +57,9 @@ function Navbar({ onSearch })
                 Photos
               </NavLink>
               <li>
-                <NavLink to="/illustrations" className={navLinkStyle}>Illustrations</NavLink>
+                <NavLink to="/illustrations" className={navLinkStyle}>
+                  Illustrations
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -63,14 +72,14 @@ function Navbar({ onSearch })
                 className="tooltip tooltip-bottom hover:tooltip-open"
                 data-tip="Notifications"
               >
-                <button className="text-2xl">
-                  <GoBell />
-                </button>
+                <motion.div whileHover={{ rotate: 15, scale: 1.1 }}>
+                  <GoBell className="text-2xl cursor-pointer" />
+                </motion.div>
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 h-50 p-2 shadow-2xl border border-black/30"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 h-50 p-2 shadow-2xl border border-black/30"
             >
               <div role="tablist" className="tabs *:p-1 tabs-border">
                 <a role="tab">Highlights</a>
@@ -84,13 +93,17 @@ function Navbar({ onSearch })
 
           <div className="dropdown dropdown-end  dropdown-bottom mb-1 cursor-pointer">
             <div tabIndex={0} role="button">
-              <div
-                className="tooltip tooltip-right hover:tooltip-open"
+              <motion.div whileHover={{ scale: 1.1 }}
+                className="tooltip tooltip-left hover:tooltip-open"
                 data-tip="Profile"
               >
-                <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
-
-              </div>
+                <img
+                  src={user?.photoURL}
+                  alt="user name"
+                  width={25}
+                  className="rounded-full"
+                />
+              </motion.div>
             </div>
             <ul
               tabIndex={0}
@@ -99,49 +112,49 @@ function Navbar({ onSearch })
               <li>
                 <div className="card-body items-center  border-b text-center">
                   <p className="text-2xl">
-                    <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
+                    <img
+                      src={user?.photoURL}
+                      alt="user name"
+                      width={25}
+                      className="rounded-full"
+                    />
                   </p>
-                  <h1>
-                    {user.displayName}
-                  </h1>
+                  <h1>{user.displayName}</h1>
                   <p>View profile</p>
                 </div>
                 <a>Stats</a>
                 <a>Download history</a>
                 <a>Account settings</a>
-
               </li>
               <li>
-                <NavLink to="/addImage" className={navLinkStyle}>Submit an image</NavLink>
+                <NavLink to="/addImage" className={navLinkStyle}>
+                  Submit an image
+                </NavLink>
                 <div className="btn btn-ghost">
                   {!isPending && (
                     <button onClick={logout} className="btn btn-ghost">
-                      Logout {" "}
-                      {user?.displayName}
+                      Logout {user?.displayName}
                     </button>
                   )}
                   {isPending && (
                     <button className="btn btn-ghost disabled" disabled>
-                      Logout {" "}
-                      {user?.displayName}
-
+                      Logout {user?.displayName}
                     </button>
                   )}
-
                 </div>
               </li>
             </ul>
           </div>
 
-
           <div className="dropdown dropdown-end pb-1 cursor-pointer">
             <div tabIndex={0} role="button">
-              <div
+              <motion.div
+                whileHover={{ rotate: 90 }}
                 className="tooltip tooltip-bottom hover:tooltip-open"
                 data-tip="Menu"
               >
-                <SlMenu />
-              </div>
+                <SlMenu className="cursor-pointer" />
+              </motion.div>
             </div>
             <ul
               tabIndex={0}
@@ -176,15 +189,12 @@ function Navbar({ onSearch })
                 <ThemeMode />
               </li>
               <li>
-                <NavLink
-                  to="/addImage"
-                  className={navLinkStyle}>
+                <NavLink to="/addImage" className={navLinkStyle}>
                   Submit an image
                 </NavLink>
               </li>
             </ul>
           </div>
-
         </div>
       </div>
 
@@ -193,9 +203,10 @@ function Navbar({ onSearch })
         <NavLink
           to="/getPlan"
           className={({ isActive }) =>
-            `btn cursor-pointer max-[973px]:hidden w-[130px] ${isActive
-              ? "btn-square border-neutral-500"
-              : "btn-square border-base-100"
+            `btn cursor-pointer max-[973px]:hidden w-[130px] ${
+              isActive
+                ? "btn-square border-neutral-500"
+                : "btn-square border-base-100"
             }`
           }
         >
@@ -204,15 +215,15 @@ function Navbar({ onSearch })
         <NavLink
           to="/addImage"
           className={({ isActive }) =>
-            `btn cursor-pointer max-[973px]:hidden w-[130px] ${isActive
-              ? "btn-square border-neutral-500"
-              : "btn-square border-base-100"
+            `btn cursor-pointer max-[973px]:hidden w-[130px] ${
+              isActive
+                ? "btn-square border-neutral-500"
+                : "btn-square border-base-100"
             }`
           }
         >
           Submit an image
         </NavLink>
-
       </div>
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2 px-4 bg-base-100 shadow-md">
@@ -232,7 +243,7 @@ function Navbar({ onSearch })
           <button className="btn btn-sm btn-ghost">Experimental</button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

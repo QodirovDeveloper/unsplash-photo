@@ -7,6 +7,7 @@ import CommentsList from "../components/CommentsList";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { LuArrowDownUp } from "react-icons/lu";
 import ImageUploadModal from "../components/ImageUploadModal";
+import { motion } from "framer-motion";
 
 const API_URL = "https://68cc1c72716562cf50767703.mockapi.io/unsplash";
 const imgbbAPI =
@@ -191,8 +192,15 @@ export default function AddImage() {
         </div>
 
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-          {images.map((item) => (
-            <div key={item.id} className="h-auto">
+          {images.map((item, i) => (
+            <motion.div
+              key={item.id}
+              className="h-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              whileHover={{ scale: 1.05 }} 
+            >
               <div className=" group w-full overflow-hidden shadow-md">
                 {/* Image */}
                 <div className="relative">
@@ -273,7 +281,7 @@ export default function AddImage() {
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

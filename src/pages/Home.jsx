@@ -2,18 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageCard from "../components/ImageCard";
 import { useOutletContext } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ACCESS_KEY = "Wz6wMjicBiLYuxxdeDfDDvHsJ38t6OmodC8BYcyvlWk";
 
-function Home()
-{
+function Home() {
   const { searchQuery } = useOutletContext();
   const [images, setImages] = useState([]);
 
-  useEffect(() =>
-  {
-    if (searchQuery)
-    {
+  useEffect(() => {
+    if (searchQuery) {
       axios
         .get(
           `https://api.unsplash.com/search/photos?query=${searchQuery}&client_id=${ACCESS_KEY}`
@@ -28,9 +26,16 @@ function Home()
       {images.length > 0 ? (
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
           {images.map((img, index) => (
-            <div key={`{img.id}-${index}`} className="mb-4 break-inside-avoid">
+            <motion.div
+              key={`{img.id}-${index}`}
+              className="mb-4 break-inside-avoid"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ scale: 1.05 }}
+            >
               <ImageCard image={img} />
-            </div>
+            </motion.div>
           ))}
         </div>
       ) : (
@@ -41,50 +46,3 @@ function Home()
 }
 
 export default Home;
-
-
-
-
-// import { Fragment } from "react";
-// import { useCollection } from "../hooks/useCollection";
-// // import Images from "../components/Images";
-
-// function Home()
-// {
-//   const { data: users } = useCollection("users");
-//   if (!users)
-//   {
-//     return <h1 className="text-3xl">Loading...</h1>;
-//   }
-//   return (
-//     <>
-//       <div>
-//         {users &&
-//           users.map((user) =>
-//           {
-//             return (
-//               <Fragment key={user.id}>
-//                 {user.online && (
-//                   <div className="avatar avatar-online">
-//                     <div className="w-10 rounded-full">
-//                       <img src={user?.photoURL} alt="user name" />
-//                     </div>
-//                   </div>
-//                 )}
-//                 {!user.online && (
-//                   <div className="avatar avatar-offline">
-//                     <div className="w-10 rounded-full">
-//                       <img src={user?.photoURL} alt="user name" />
-//                     </div>
-//                   </div>
-//                 )}
-//               </Fragment>
-//             );
-//           })}
-//       </div>
-//       {/* <Images /> */}
-//     </>
-//   );
-// }
-
-// export default Home;

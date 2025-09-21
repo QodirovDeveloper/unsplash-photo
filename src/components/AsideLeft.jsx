@@ -12,9 +12,10 @@ import {
 import { SlMenu } from "react-icons/sl";
 import ThemeMode from "./ThemeMode";
 import { SiUnsplash } from "react-icons/si";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLogout } from "../hooks/useLogout";
+import { motion } from "framer-motion";
 
 function AsideLeft() {
   const { isPending, logout } = useLogout();
@@ -27,11 +28,16 @@ function AsideLeft() {
     }`;
   return (
     <>
-      <div className="max-[973px]:hidden z-999999 bg-base-100 fixed top-0 bottom-0 left-0 py-5 border border-black/20 px-2.5 flex flex-col items-center justify-between">
+      <motion.div
+        className="max-[973px]:hidden z-999999 bg-base-100 fixed top-0 bottom-0 left-0 py-5 border border-black/20 px-2.5 flex flex-col items-center justify-between"
+        initial={{ y: 900, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
         <div className="flex flex-col gap-5 items-center">
-          <span className="text-2xl">
+          <Link to="/" className="text-2xl">
             <SiUnsplash />
-          </span>
+          </Link>
 
           <div
             className="tooltip tooltip-right hover:tooltip-open "
@@ -72,14 +78,14 @@ function AsideLeft() {
           <ThemeMode />
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
-              <div
+              <motion.div whileHover={{ rotate: 15, scale: 1.1 }}
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Notifications"
               >
                 <button className=" text-2xl">
                   <GoBell />
                 </button>
-              </div>
+              </motion.div>
             </div>
             <ul
               tabIndex={0}
@@ -97,7 +103,7 @@ function AsideLeft() {
 
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
-              <div
+              <motion.div whileHover={{ scale: 1.1 }}
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Profile"
               >
@@ -107,7 +113,7 @@ function AsideLeft() {
                   width={25}
                   className="rounded-full"
                 />
-              </div>
+              </motion.div>
             </div>
             <ul
               tabIndex={0}
@@ -154,12 +160,13 @@ function AsideLeft() {
 
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
-              <div
+              <motion.div
+                whileHover={{ rotate: -90 }}
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Menu"
               >
                 <SlMenu />
-              </div>
+              </motion.div>
             </div>
             <ul
               tabIndex={0}
@@ -194,7 +201,7 @@ function AsideLeft() {
             </ul>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
