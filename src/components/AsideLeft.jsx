@@ -2,8 +2,7 @@ import { FaRegFileAlt, FaRegUserCircle } from "react-icons/fa";
 import { GoBell, GoDownload } from "react-icons/go";
 import { LiaPenNibSolid } from "react-icons/lia";
 import { LuTabletSmartphone } from "react-icons/lu";
-import
-{
+import {
   MdGroups,
   MdOutlineFolderCopy,
   MdOutlineHomeWork,
@@ -14,15 +13,18 @@ import { SlMenu } from "react-icons/sl";
 import ThemeMode from "./ThemeMode";
 import { SiUnsplash } from "react-icons/si";
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { useLogout } from "../hooks/useLogout";
 
-function AsideLeft()
-{
+function AsideLeft() {
   const { isPending, logout } = useLogout();
   const { user } = useSelector((state) => state.user);
   const navLinkStyle = ({ isActive }) =>
-    `text-2xl ${isActive ? "btn btn-square border-neutral-500" : "btn btn-square border-base-100"}`
+    `text-2xl ${
+      isActive
+        ? "btn btn-square border-neutral-500"
+        : "btn btn-square border-base-100"
+    }`;
   return (
     <>
       <div className="max-[973px]:hidden z-999999 bg-base-100 fixed top-0 bottom-0 left-0 py-5 border border-black/20 px-2.5 flex flex-col items-center justify-between">
@@ -93,15 +95,18 @@ function AsideLeft()
             </ul>
           </div>
 
-
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
               <div
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Profile"
               >
-                <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
-
+                <img
+                  src={user?.photoURL}
+                  alt="user name"
+                  width={25}
+                  className="rounded-full"
+                />
               </div>
             </div>
             <ul
@@ -111,36 +116,39 @@ function AsideLeft()
               <li>
                 <div className="card-body items-center  border-b text-center">
                   <p className="text-2xl">
-                    <img src={user?.photoURL} alt="user name" width={25} className="rounded-full" />
+                    <img
+                      src={user?.photoURL}
+                      alt="user name"
+                      width={25}
+                      className="rounded-full"
+                    />
                   </p>
-                  <h1>
-                    {user.displayName}
-                  </h1>
+                  <h1>{user.displayName}</h1>
                   <p>View profile</p>
                 </div>
                 <a>Stats</a>
                 <a>Download history</a>
                 <a>Account settings</a>
               </li>
-              <li>
-                <button className="btn btn-outline m-1">Submit an image</button>
-                <div className="btn btn-ghost">
-                  {!isPending && (
-                    <button onClick={logout} className="btn btn-ghost">
-                      Logout {" "}
-                      {user?.displayName}
-                    </button>
-                  )}
-                  {isPending && (
-                    <button className="btn btn-ghost disabled" disabled>
-                      Logout {" "}
-                      {user?.displayName}
-
-                    </button>
-                  )}
-
-                </div>
-              </li>
+              <NavLink to="/addImage">
+                <li>
+                  <button className="btn btn-outline m-1">
+                    Submit an image
+                  </button>
+                </li>
+              </NavLink>
+              <>
+                {!isPending && (
+                  <li onClick={logout} className="btn btn-ghost">
+                    Logout {user?.displayName}
+                  </li>
+                )}
+                {isPending && (
+                  <button className="btn btn-ghost disabled" disabled>
+                    Logout {user?.displayName}
+                  </button>
+                )}
+              </>
             </ul>
           </div>
 

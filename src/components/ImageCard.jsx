@@ -2,7 +2,7 @@ import { FaArrowDown, FaHeart, FaPlus } from "react-icons/fa";
 
 function ImageCard({ image }) {
   return (
-    <div className="relative group w-full overflow-hidden rounded-lg shadow-md">
+    <div className="relative group w-full overflow-hidden shadow-md">
       <img
         src={image.urls.small}
         alt={image.alt_description}

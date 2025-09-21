@@ -11,8 +11,7 @@ import MainLayout from "./layout/MainLayout";
 import { login, authReady } from "./app/features/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
-import { useState } from "react"; // ⬅️ qo‘shing
-
+import { useState } from "react";
 import Collections from "./pages/Collections";
 import DownloadHistory from "./pages/DownloadHistory";
 import Illustrations from "./pages/Illustrations";
@@ -23,7 +22,7 @@ import AddImage from "./pages/AddImage";
 function App()
 {
 
-  const [searchQuery, setSearchQuery] = useState(""); // ⬅️ holat qo‘shish
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (query) =>
   {

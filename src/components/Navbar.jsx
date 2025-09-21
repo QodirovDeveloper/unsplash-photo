@@ -27,7 +27,7 @@ function Navbar({ onSearch })
     `text-sm ${isActive ? "btn btn-outline border-neutral-500" : "btn btn-outline border-base-100"}`
 
   return (
-    <div className="fixed top-0 min-[973px]:left-[62px]  z-99999 left-0 right-0 backdrop-blur">
+    <div className="fixed top-0 min-[973px]:left-[62px]  z-999 left-0 right-0 backdrop-blur">
       <div className="min-[973px]:hidden pt-4 px-7 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <span className="text-2xl">
@@ -81,41 +81,6 @@ function Navbar({ onSearch })
               </div>
             </ul>
           </div>
-
-          {/* <div className="dropdown dropdown-end pb-1">
-            <div tabIndex={0} role="button">
-              <div
-                className="tooltip tooltip-bottom hover:tooltip-open"
-                data-tip="Profile"
-              >
-                <button className="text-2xl">
-                  <FaRegUserCircle />
-                </button>
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 h-[340px] shadow-2xl border border-black/30"
-            >
-              <li>
-                <div className="card-body items-center border-b text-center">
-                  <p className="text-2xl">
-                    <FaRegUserCircle />
-                  </p>
-                  <h1>Hasanboy Qodirov</h1>
-                  <p>View profile</p>
-                </div>
-                <a>Stats</a>
-                <a>Download history</a>
-                <a>Account settings</a>
-              </li>
-              <li>
-                <NavLink to="/addImage" className="btn btn-outline p-1">Submit an image</NavLink>
-                <button className="btn btn-ghost">Logout @hasanboydevvv</button>
-              </li>
-            </ul>
-          </div> */}
-
 
           <div className="dropdown dropdown-end  dropdown-bottom mb-1 cursor-pointer">
             <div tabIndex={0} role="button">
