@@ -60,7 +60,7 @@ function AsideLeft() {
             className="tooltip tooltip-right hover:tooltip-open"
             data-tip="Collections"
           >
-            <NavLink to="/collections" className={navLinkStyle}>
+            <NavLink to="/addImage" className={navLinkStyle}>
               <MdOutlineFolderCopy />
             </NavLink>
           </div>
@@ -78,7 +78,8 @@ function AsideLeft() {
           <ThemeMode />
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
-              <motion.div whileHover={{ rotate: 15, scale: 1.1 }}
+              <motion.div
+                whileHover={{ rotate: 15, scale: 1.1 }}
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Notifications"
               >
@@ -103,7 +104,8 @@ function AsideLeft() {
 
           <div className="dropdown dropdown-right  dropdown-end mb-1">
             <div tabIndex={0} role="button">
-              <motion.div whileHover={{ scale: 1.1 }}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
                 className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Profile"
               >
@@ -119,38 +121,54 @@ function AsideLeft() {
               tabIndex={0}
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 h-[340px]  shadow-2xl border border-black/30"
             >
-              <li>
-                <div className="card-body items-center  border-b text-center">
-                  <p className="text-2xl">
-                    <img
-                      src={user?.photoURL}
-                      alt="user name"
-                      width={25}
-                      className="rounded-full"
-                    />
-                  </p>
-                  <h1>{user.displayName}</h1>
-                  <p>View profile</p>
-                </div>
-                <a>Stats</a>
-                <a>Download history</a>
-                <a>Account settings</a>
-              </li>
-              <NavLink to="/addImage">
+              <Link to="/profilePage">
                 <li>
-                  <button className="btn btn-outline m-1">
-                    Submit an image
-                  </button>
+                  <div className="card-body items-center  border-b text-center">
+                    <p className="text-2xl">
+                      <img
+                        src={user?.photoURL}
+                        alt="user name"
+                        width={25}
+                        className="rounded-full"
+                      />
+                    </p>
+                    <h1>{user.displayName}</h1>
+                    <p>View profile</p>
+                  </div>
                 </li>
-              </NavLink>
+              </Link>
+              <li>
+                <NavLink
+                  to="/downloadHistory"
+                  className={
+                    ({ isActive }) =>
+                      isActive
+                        ? "btn btn-outline m-1" // active bo‘lsa
+                        : "btn btn-soft m-1" // oddiy holatda
+                  }
+                >
+                  Download history
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/addImage"
+                  className={({ isActive }) =>
+                    isActive ? "btn btn-outline m-1" : "btn btn-soft m-1"
+                  }
+                >
+                  Submit an image
+                </NavLink>
+              </li>
               <>
                 {!isPending && (
-                  <li onClick={logout} className="btn btn-ghost">
+                  <li onClick={logout} className="btn btn-soft btn-error">
                     Logout {user?.displayName}
                   </li>
                 )}
                 {isPending && (
-                  <button className="btn btn-ghost disabled" disabled>
+                  <button className="btn btn-soft btn-error disabled" disabled>
                     Logout {user?.displayName}
                   </button>
                 )}

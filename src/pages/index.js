@@ -1,5 +1,10 @@
 export { default as Home } from "./Home";
 export { default as Login } from "./Login";
-export { default as Profile } from "./Profile";
 export { default as Signup } from "./Signup";
 export { default as SingleImage } from "./SingleImage";
+export { default as Collections } from "./Collections";
+export { default as DownloadHistory } from "./DownloadHistory";
+export { default as Illustrations } from "./Illustrations";
+export { default as GetPlan } from "./GetPlan";
+export { default as AddImage } from "./AddImage";
+export { default as ProfilePage } from "./ProfilePage";

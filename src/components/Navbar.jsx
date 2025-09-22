@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import ThemeMode from "./ThemeMode";
 import { FaAngleDown, FaRegFileAlt, FaRegUserCircle } from "react-icons/fa";
 import Search from "./Search";
@@ -32,7 +32,7 @@ function Navbar({ onSearch }) {
     <motion.div
       className="fixed top-0 min-[973px]:left-[62px]  z-999 left-0 right-0 backdrop-blur"
       initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }} 
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="min-[973px]:hidden pt-4 px-7 flex items-center justify-between">
@@ -91,10 +91,11 @@ function Navbar({ onSearch }) {
             </ul>
           </div>
 
-          <div className="dropdown dropdown-end  dropdown-bottom mb-1 cursor-pointer">
+          <div className="dropdown dropdown-left  dropdown-start mb-1">
             <div tabIndex={0} role="button">
-              <motion.div whileHover={{ scale: 1.1 }}
-                className="tooltip tooltip-left hover:tooltip-open"
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="tooltip tooltip-right hover:tooltip-open"
                 data-tip="Profile"
               >
                 <img
@@ -109,40 +110,58 @@ function Navbar({ onSearch }) {
               tabIndex={0}
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 h-[340px]  shadow-2xl border border-black/30"
             >
+              <Link to="/profilePage">
+                <li>
+                  <div className="card-body items-center  border-b text-center">
+                    <p className="text-2xl">
+                      <img
+                        src={user?.photoURL}
+                        alt="user name"
+                        width={25}
+                        className="rounded-full"
+                      />
+                    </p>
+                    <h1>{user.displayName}</h1>
+                    <p>View profile</p>
+                  </div>
+                </li>
+              </Link>
               <li>
-                <div className="card-body items-center  border-b text-center">
-                  <p className="text-2xl">
-                    <img
-                      src={user?.photoURL}
-                      alt="user name"
-                      width={25}
-                      className="rounded-full"
-                    />
-                  </p>
-                  <h1>{user.displayName}</h1>
-                  <p>View profile</p>
-                </div>
-                <a>Stats</a>
-                <a>Download history</a>
-                <a>Account settings</a>
+                <NavLink
+                  to="/downloadHistory"
+                  className={
+                    ({ isActive }) =>
+                      isActive
+                        ? "btn btn-outline m-1" // active bo‘lsa
+                        : "btn btn-soft m-1" // oddiy holatda
+                  }
+                >
+                  Download history
+                </NavLink>
               </li>
+
               <li>
-                <NavLink to="/addImage" className={navLinkStyle}>
+                <NavLink
+                  to="/addImage"
+                  className={({ isActive }) =>
+                    isActive ? "btn btn-outline m-1" : "btn btn-soft m-1"
+                  }
+                >
                   Submit an image
                 </NavLink>
-                <div className="btn btn-ghost">
-                  {!isPending && (
-                    <button onClick={logout} className="btn btn-ghost">
-                      Logout {user?.displayName}
-                    </button>
-                  )}
-                  {isPending && (
-                    <button className="btn btn-ghost disabled" disabled>
-                      Logout {user?.displayName}
-                    </button>
-                  )}
-                </div>
               </li>
+              <>
+                {!isPending && (
+                  <li onClick={logout} className="btn btn-soft btn-error">
+                    Logout {user?.displayName}
+                  </li>
+                )}
+                {isPending && (
+                  <button className="btn btn-soft btn-error disabled" disabled>
+                    Logout {user?.displayName}
+                  </button>
+                )}
+              </>
             </ul>
           </div>
 

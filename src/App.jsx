@@ -1,10 +1,20 @@
-import
-{
+import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { Home, Profile, SingleImage, Login, Signup } from "./pages/index";
+import {
+  Home,
+  SingleImage,
+  Login,
+  Signup,
+  Collections,
+  DownloadHistory,
+  Illustrations,
+  GetPlan,
+  AddImage,
+  ProfilePage,
+} from "./pages/index";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import MainLayout from "./layout/MainLayout";
@@ -12,23 +22,13 @@ import { login, authReady } from "./app/features/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { useState } from "react";
-import Collections from "./pages/Collections";
-import DownloadHistory from "./pages/DownloadHistory";
-import Illustrations from "./pages/Illustrations";
-import GetPlan from "./pages/GetPlan";
-import AddImage from "./pages/AddImage";
 
-
-function App()
-{
-
+function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = (query) =>
-  {
+  const handleSearch = (query) => {
     setSearchQuery(query);
   };
-
 
   const dispatch = useDispatch();
   const { user, isAuthReady } = useSelector((store) => store.user);
@@ -41,23 +41,14 @@ function App()
         </ProtectedRoutes>
       ),
       children: [
-        {
-          index: true,
-          element: <Home />,
-        },
-        {
-          path: "/profile",
-          element: <Profile />,
-        },
-        {
-          path: "/singleImage/:id",
-          element: <SingleImage />,
-        },
+        { index: true, element: <Home /> },
+        { path: "/singleImage/:id", element: <SingleImage /> },
         { path: "/collections", element: <Collections /> },
         { path: "/downloadHistory", element: <DownloadHistory /> },
         { path: "/illustrations", element: <Illustrations /> },
         { path: "/getPlan", element: <GetPlan /> },
         { path: "/addImage", element: <AddImage /> },
+        { path: "/profilePage", element: <ProfilePage /> },
       ],
     },
     {
@@ -70,10 +61,8 @@ function App()
     },
   ]);
 
-  onAuthStateChanged(auth, (user) =>
-  {
-    if (user?.displayName && user?.photoURL)
-    {
+  onAuthStateChanged(auth, (user) => {
+    if (user?.displayName && user?.photoURL) {
       dispatch(login(user));
     }
     dispatch(authReady());
@@ -83,6 +72,3 @@ function App()
 }
 
 export default App;
-
-// const ACCESS_KEY = "O2XRyjimvUwQaxKL4TysGBBPrQEa-1mb4d-FKIx3-pY";
-// `https://api.unsplash.com/search/photos?query=${seatchParams}&client_id=` +
