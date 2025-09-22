@@ -45,9 +45,9 @@ export default function SoxtaEmailNotice() {
   useAnimationFrame((t) => {
     if (!isCoarse) return;
     float.current.t = t / 1000;
-    const amplitude = 15;
+    const amplitude = 30;
     const offsetX = Math.sin(float.current.t) * amplitude;
-    const offsetY = Math.cos(float.current.t * 0.5) * amplitude * 0.5;
+    const offsetY = Math.cos(float.current.t * 0.7) * amplitude * 1;
     x.set(window.innerWidth / 2 + offsetX - 150);
     y.set(window.innerHeight - 120 + offsetY);
   });
