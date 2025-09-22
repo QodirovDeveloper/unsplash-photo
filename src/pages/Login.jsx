@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
 import ThemeMode from '../components/ThemeMode';
+import SoxtaEmailNotice from "../components/SoxtaEmailNotice";
 
 function Login()
 {
@@ -17,6 +18,7 @@ function Login()
   };
   return (
     <main>
+      <SoxtaEmailNotice />
       <div className="relative h-screen max-lg:text-white">
         <div className="lg:flex items-center justify-center h-full">
           <div className="lg:w-1/2 w-full h-full bg-[url('https://picsum.photos/1200/800')] bg-cover bg-center bg-no-repeat"></div>

@@ -13,6 +13,7 @@ createRoot(document.getElementById("root")).render(
         style: {
           zIndex: 99999,
         },
-      }} />
+      }}
+    />
   </Provider>
 );

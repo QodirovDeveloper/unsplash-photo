@@ -2,6 +2,7 @@ import FormInput from "../components/FormInput";
 import { Link } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 import toast from "react-hot-toast";
+import SoxtaEmailNotice from "../components/SoxtaEmailNotice";
 
 function Signup() {
   const { isPending, signup } = useSignup();
@@ -22,6 +23,7 @@ function Signup() {
   };
   return (
     <main>
+      <SoxtaEmailNotice />
       <div className="relative h-screen">
         <div className="lg:flex h-full">
           <div className="lg:w-1/2 w-full h-full bg-[url('https://picsum.photos/1200/800')] bg-cover bg-center bg-no-repeat"></div>
