@@ -132,11 +132,25 @@ function Navbar({ onSearch }) {
                   className={
                     ({ isActive }) =>
                       isActive
-                        ? "btn btn-outline m-1" // active bo‘lsa
-                        : "btn btn-soft m-1" // oddiy holatda
+                        ? "btn btn-outline m-1"
+                        : "btn btn-soft m-1"
                   }
                 >
                   Download history
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/getPlan"
+                  className={
+                    ({ isActive }) =>
+                      isActive
+                        ? "btn btn-outline m-1"
+                        : "btn btn-soft m-1"
+                  }
+                >
+                  Get Plan +
                 </NavLink>
               </li>
 
