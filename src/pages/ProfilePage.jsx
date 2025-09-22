@@ -28,7 +28,7 @@ export default function ProfilePage() {
           </motion.h1>
 
           <motion.p
-            className="text-gray-600 mt-1"
+            className=" mt-1"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -50,7 +50,7 @@ export default function ProfilePage() {
 
           {/* Edit Profile */}
           <motion.button
-            className="mt-4 px-4 py-2 rounded-md border bg-gray-100 hover:bg-gray-200 transition"
+            className="btn btn-soft mt-2"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.4 }}
@@ -66,7 +66,7 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          <ul className="inline-flex gap-6 text-sm font-medium text-gray-600">
+          <ul className="inline-flex gap-6 text-sm font-medium ">
             <li className="pb-2 border-b-2 border-black">Photos 0</li>
             <li className="pb-2 hover:border-b-2 hover:border-black cursor-pointer">
               Illustrations 0
